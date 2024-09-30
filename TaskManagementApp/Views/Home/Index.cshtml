@@ -1,0 +1,43 @@
+﻿@model IEnumerable<TaskManagementApp.Models.TaskModel>
+
+<h2>Task List</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Deadline</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+
+        {
+
+            foreach (var task in Model)
+
+            {
+                <tr>
+                    <td>@task.Title</td>
+                    <td>@task.Description</td>
+                    <td>@task.Deadline.ToShortDateString()</td>
+                    <td>
+                        <a href="/Task/Edit/@task.Id" class="btn btn-primary">Edit</a>
+                        <a href="/Task/Delete/@task.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+
+        }
+
+        else
+
+        {
+            <tr>
+                <td colspan="4">No tasks available.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-controller="Task" asp-action="Create" class="btn btn-success">Create New Task</a>
